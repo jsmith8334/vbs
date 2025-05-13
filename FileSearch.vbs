@@ -105,14 +105,16 @@ Sub FinalizeExcelReport(filePath)
     Set xlSummary = xlBook.Sheets.Add
     xlSummary.Name = "Summary"
     xlSummary.Cells(1, 1).Value = "Summary"
-    xlSummary.Cells(2, 1).Value = "Search Term"
-    xlSummary.Cells(2, 2).Value = strSearchTerm
-    xlSummary.Cells(3, 1).Value = "File Extensions"
-    xlSummary.Cells(3, 2).Value = strExtensions
-    xlSummary.Cells(4, 1).Value = "Total Files Scanned"
-    xlSummary.Cells(4, 2).Value = totalFilesScanned
-    xlSummary.Cells(5, 1).Value = "Total Matches Found"
-    xlSummary.Cells(5, 2).Value = totalMatchesFound
+	xlSummary.Cells(2, 1).Value = "Starting Folder"
+    xlSummary.Cells(2, 2).Value = strInputFolder
+    xlSummary.Cells(3, 1).Value = "Search Term"
+    xlSummary.Cells(3, 2).Value = strSearchTerm
+    xlSummary.Cells(4, 1).Value = "File Extensions"
+    xlSummary.Cells(4, 2).Value = strExtensions
+    xlSummary.Cells(5, 1).Value = "Total Files Scanned"
+    xlSummary.Cells(5, 2).Value = totalFilesScanned
+    xlSummary.Cells(6, 1).Value = "Total Matches Found"
+    xlSummary.Cells(6, 2).Value = totalMatchesFound
 
     xlSummary.Columns("A").ColumnWidth = 30
 
