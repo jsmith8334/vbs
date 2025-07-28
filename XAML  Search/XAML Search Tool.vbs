@@ -1,7 +1,6 @@
 Option Explicit
 
-'-----------------  Variables   -----------------------
-Dim strSearchTerm, strInputFolder, strExtensions, xlApp, xlBook, xlSheet, currentRow
+Dim strSearchTerm, strInputFolder, strExtensions, xlApp, xlBook, xlSheet, currentRow, strExcelFileName
 Dim currentFolder, filePath, oShell, FSO, logFile, errorLogPath
 Dim totalFilesScanned, totalMatchesFound
 
@@ -13,17 +12,16 @@ Set logFile = FSO.CreateTextFile(errorLogPath, True)
 Set xlApp = CreateObject("Excel.Application")
 xlApp.Visible = False
 
-'-----------------  Inputs  -----------------------
 strInputFolder = InputBox("Please input the folder path you wish to search:")
 strSearchTerm = InputBox("Please enter the term you want to search for:")
 strExtensions = LCase(InputBox("Enter file extensions to search (comma-separated, e.g., xaml,xml,txt):"))
+strExcelFileName = InputBox("What would you like the name of the output file to be?")
 
-
-'-----------------  Main Code   -----------------------
 If strInputFolder = "" OR strSearchTerm = "" OR strExtensions = "" Then
     MsgBox "Cancelled, At least one input was blank."
 Else
-    filePath = currentFolder & "\Search Report - " & strSearchTerm & ".xlsx"
+    'filePath = currentFolder & "\Search Report - " & strSearchTerm & ".xlsx"
+	filePath = currentFolder & "\Search Report - " & strExcelFileName & ".xlsx"
     Set xlBook = xlApp.Workbooks.Add
     Set xlSheet = xlBook.Sheets(1)
     xlSheet.Name = "Results"
@@ -64,6 +62,8 @@ Else
     "Total files scanned: " & totalFilesScanned & vbCrLf & _
     "Total matches found: " & totalMatchesFound
 End If
+
+
 
 '------------------ Subs & Functions ------------------
 
