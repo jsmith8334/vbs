@@ -1,7 +1,7 @@
-'Double click this file from the computer, VDI, or server that you wish to run this on.
+Set WShell = CreateObject("WScript.Shell")
 
-set wsc = CreateObject("WScript.Shell")
 Do
+WShell.SendKeys "{RIGHT 2}"
+WShell.SendKeys "{LEFT 2}"
 WScript.Sleep(60*1000)
-wsc.SendKeys("{SCROLLLOCK 2}")
 Loop
