@@ -1,22 +1,18 @@
+' File: PreventLock_RPA_Safe.vbs
+' No keyboard input – Safe for UiPath, Automation Anywhere, Blue Prism, etc.
+' Tiny invisible mouse wiggle every 59 seconds
+
 Set WshShell = CreateObject("WScript.Shell")
 
 Do
+    WScript.Sleep 59000   ' 59 seconds – keeps you under the usual 1–15 minute lock policies
 
-	strCmd = "powershell -Command " & Chr(34) & _
-		"Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; " & _
-		"public class Mouse { [DllImport(" & Chr(34) & "user32.dll" & Chr(34) & ")] public static extern bool GetCursorPos(out POINT pt); " & _
-		"[DllImport(" & Chr(34) & "user32.dll" & Chr(34) & ")] public static extern bool SetCursorPos(int x, int y); " & _
-		"[StructLayout(LayoutKind.Sequential)] public struct POINT { public int X; public int Y; } }'; " & _
-		"$pt = New-Object Mouse+POINT; [Mouse]::GetCursorPos([ref]$pt) | Out-Null; " & _
-		"[Mouse]::SetCursorPos($pt.X + 2, $pt.Y) | Out-Null; " & _
-		"Start-Sleep -Milliseconds 500; " & _
-		"[Mouse]::SetCursorPos($pt.X, $pt.Y) | Out-Null; " & _
-		"Start-Sleep -Milliseconds 500; " & _
-		"[Mouse]::SetCursorPos($pt.X + 2, $pt.Y) | Out-Null; " & _
-		"Start-Sleep -Milliseconds 500; " & _
-		"[Mouse]::SetCursorPos($pt.X, $pt.Y) | Out-Null;" & _
-		Chr(34)
-
-	WshShell.Run strCmd, 0, True
+    ' Move mouse +1 pixel (invisible)
+    WshShell.Run "powershell -command ""$p=[System.Windows.Forms.Cursor]::Position; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(($p.X + 1), $p.Y)""", 0, True
+    
+    WScript.Sleep 300
+    
+    ' Move back -1 pixel (net movement = 0)
+    WshShell.Run "powershell -command ""$p=[System.Windows.Forms.Cursor]::Position; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(($p.X - 1), $p.Y)""", 0, True
 
 Loop
