@@ -20,7 +20,7 @@ If Not objFSO.FolderExists(destinationPath) Then
 End If
 
 On Error Resume Next
-objFSO.CopyFolder sourcePath & "\*", destinationPath & "\", OverwriteExisting
+'objFSO.CopyFolder sourcePath & "\*", destinationPath & "\", OverwriteExisting
 objFSO.CopyFile sourcePath & "\*", destinationPath & "\", OverwriteExisting
 
 If Err.Number <> 0 Then
