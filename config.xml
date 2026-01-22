@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teams>
+    <team>
+        <name>Process Optimization and Automation Team</name>
+        <process_owner>Jon Smith</process_owner>
+        <emails>
+            <email>jonathan.smith@gsa.gov</email>
+        </emails>
+        <email_template>
+            <![CDATA[
+            <html>
+                <body>
+                    <h2>Broken Link Report - {team_name}</h2>
+                    <p>Dear {process_owner},</p>
+                    <p>Please find below the results of the automated link check:</p>
+                    {results_table}
+                    <br/>
+                    <p>Regards,<br/>Broken Link Checker Bot</p>
+                </body>
+            </html>
+            ]]>
+        </email_template>
+        <urls>
+            <url>https://www.google.com</url>
+            <url>https://insite.gsa.gov/</url>
+        </urls>
+    </team>
+</teams>
